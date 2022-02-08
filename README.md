@@ -1,4 +1,4 @@
-# [Név]
+# Balaska Klaudia
 
 ## Hogyan kezdj neki?
 
