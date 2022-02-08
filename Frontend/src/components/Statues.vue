@@ -17,11 +17,34 @@
                 <td>{{ statue.price }}</td>
                 <td>
                     <button>Szerkesztés</button>
+                </td>
+                <td>
                     <button>Törlés</button>
                 </td>
             </tr>
+            <tr>
+                    <td>
+                    <input type="text">
+                </td>
+                    <td>
+                    <input type="number">
+                </td>
+                    <td>
+                    <input type="number">
+                </td>
+                    <td>
+                    <button>Mentés</button>
+                </td>
+                    <td>
+                    <button>Mégse</button>
+                </td>
+                </tr>
+            
         </tbody>
       </table>
+      
+      
+      
   </div>
 </template>
 
