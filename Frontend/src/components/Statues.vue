@@ -1,7 +1,7 @@
 <template>
   <div>
       <h1>Szobrok</h1>
-      <table>
+      <table class="table table-sm table-striped table-dark">
         <thead>
             <tr>
                 <th>Személy</th>
@@ -16,10 +16,8 @@
                 <td>{{ statue.height }}</td>
                 <td>{{ statue.price }}</td>
                 <td>
-                    <button @click="szerkesztes(statue.id)">Szerkesztés</button>
-                </td>
-                <td>
-                    <button @click="torles(statue.id)">Törlés</button>
+                    <button id="btn_szurke" @click="szerkesztes(statue.id)">Szerkesztés</button>
+                    <button id="btn_narancs" @click="torles(statue.id)">Törlés</button>
                 </td>
             </tr>
             <tr>
@@ -34,10 +32,8 @@
                 </td>
                     <td>
                     <button v-if="ujSzobor" @click="mentes()">Mentés</button>
-                    <button v-if="!ujSzobor" @click="szerkesztesMentese()">Mentés</button>
-                </td>
-                    <td>
-                    <button @click="frissites()">Mégse</button>
+                    <button id="btn_szurke" v-if="!ujSzobor" @click="szerkesztesMentese()">Mentés</button>
+                    <button id="btn_narancs" @click="frissites()">Mégse</button>
                 </td>
                 </tr>
         </tbody>
