@@ -16,7 +16,7 @@
                 <td>{{ statue.height }}</td>
                 <td>{{ statue.price }}</td>
                 <td>
-                    <button>Szerkesztés</button>
+                    <button @click="szerkesztes(statue.id)">Szerkesztés</button>
                 </td>
                 <td>
                     <button @click="torles(statue.id)">Törlés</button>
@@ -33,10 +33,11 @@
                     <input type="number" v-model="statue.price">
                 </td>
                     <td>
-                    <button @click="mentes()">Mentés</button>
+                    <button v-if="ujSzobor" @click="mentes()">Mentés</button>
+                    <button v-if="!ujSzobor" @click="szerkesztesMentese()">Mentés</button>
                 </td>
                     <td>
-                    <button>Mégse</button>
+                    <button @click="frissites()">Mégse</button>
                 </td>
                 </tr>
         </tbody>
@@ -84,6 +85,27 @@ export default {
       });
       await this.loadData();
       this.frissites();
+  },
+
+  async szerkesztes(id) {
+      let Response = await fetch(`http://127.0.0.1:8000/api/statues/${id}`);
+      let data = await Response.json();
+      this.statue = {...data};
+      this.ujSzobor = false;
+  },
+
+  async szerkesztesMentese() {
+      await fetch(`http://127.0.0.1:8000/api/statues/${this.statue.id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(this.statue) 
+            });
+            this.loadData();
+            this.frissites();
+            this.ujSzobor = true;
   },
 
   frissites() {
