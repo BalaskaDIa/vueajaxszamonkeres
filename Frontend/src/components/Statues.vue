@@ -24,16 +24,16 @@
             </tr>
             <tr>
                     <td>
-                    <input type="text">
+                    <input type="text" v-model="statue.person">
                 </td>
                     <td>
-                    <input type="number">
+                    <input type="number" v-model="statue.height">
                 </td>
                     <td>
-                    <input type="number">
+                    <input type="number" v-model="statue.price">
                 </td>
                     <td>
-                    <button>Mentés</button>
+                    <button @click="mentes()">Mentés</button>
                 </td>
                     <td>
                     <button>Mégse</button>
@@ -71,6 +71,19 @@ export default {
       });
       console.log(Response);
       await this.loadData();
+  },
+
+  async mentes() {
+      await fetch('http://127.0.0.1:8000/api/statues', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(this.statue)
+      });
+      await this.loadData();
+      this.frissites();
   },
 
   frissites() {
