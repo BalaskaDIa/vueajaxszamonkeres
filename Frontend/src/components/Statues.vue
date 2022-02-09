@@ -19,7 +19,7 @@
                     <button>Szerkesztés</button>
                 </td>
                 <td>
-                    <button>Törlés</button>
+                    <button @click="torles(statue.id)">Törlés</button>
                 </td>
             </tr>
             <tr>
@@ -39,12 +39,8 @@
                     <button>Mégse</button>
                 </td>
                 </tr>
-            
         </tbody>
-      </table>
-      
-      
-      
+      </table> 
   </div>
 </template>
 
@@ -53,6 +49,12 @@ export default {
   name: 'Statues',
   data()  {
       return {
+          statue: {
+              id: null,
+              person: '',
+              height: '',
+              price: '',
+          },
         statues: []
       }
   },
@@ -61,9 +63,27 @@ export default {
           let Response = await fetch('http://127.0.0.1:8000/api/statues');
           let data = await Response.json();
           this.statues = data;
-      }
   },
-  mounted() {
+  
+  async torles(id) {
+      let Response = await fetch(`http://127.0.0.1:8000/api/statues/${id}`, {
+          method: 'DELETE'
+      });
+      console.log(Response);
+      await this.loadData();
+  },
+
+  frissites() {
+      this.statue = {
+          id: null,
+          person: '',
+          height: '',
+          price: ''
+      };
+    }
+  },
+
+    mounted() {
     this.loadData();
   }
 }
